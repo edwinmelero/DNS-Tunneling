@@ -5,7 +5,22 @@
 When using DNS tunneling, the attacker must be able to act as an authoritative name server so that queries for name records are directed to his or her machine. Modern techniques use domain generation algorithms (DGA) to cycle rapidly through ephemerally-created domains. Our approach will be to compromise the records on another name server (hosted on LAMP) to create a delegation for a subdomain. Our attacking machine (PT1) will be the name server for this subdomain. To simplify things, we'll assume the compromise takes the form of having discovered the administrative credentials for LAMP.
 
 
+
+Select the **LAMP VM** and log on using the credentials lamp and Pa$$w0rd.
+
+Run the following commands to open the DNS records for the 515web.net domain:
+
+**cd /etc/bind**
+
+**sudo nano named.conf.options**
+
 ![image](https://github.com/itzyezz/DNS-Tunneling/assets/105263523/5d060a5c-fa65-438e-a98a-cbaa995ce2a5)
+
+Edit and add the following two lines, confirming with Pa$$w0rd when prompted:
+
+**dnssec-validation no;**
+
+**allow-recursion { "any"; };**
 
 This step is necessary because for technical reasons we cannot use the DNS server running on DC1 as a resolver. We have to query the 515web.net server directly and have it resolve our queries for us. Note that this is an unsecure configuration for an authoritative name server.
 ![image](https://github.com/itzyezz/DNS-Tunneling/assets/105263523/c440c7c9-c5f6-472f-8926-49e80cd5526a)
