@@ -1,7 +1,9 @@
 # DNS-Tunneling
 
+Network activity is often the best source of indicators when analyzing a suspected incident. It is very hard for attackers to disguise the endpoints involved in either sending commands to a malicious bot installed on a local host or transferring data out of the network. In this lab, I set up a simple DNS tunneling mechanism to illustrate how attackers can try to disguise communications by hiding it within a common protocol.
 
 # Set Up the Attack
+
 When using DNS tunneling, the attacker must be able to act as an authoritative name server so that queries for name records are directed to his or her machine. Modern techniques use domain generation algorithms (DGA) to cycle rapidly through ephemerally-created domains. Our approach will be to compromise the records on another name server (hosted on LAMP) to create a delegation for a subdomain. Our attacking machine (PT1) will be the name server for this subdomain. To simplify things, we'll assume the compromise takes the form of having discovered the administrative credentials for LAMP.
 
 
